@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<title>Palette generator demo</title>
+<style>
+  span, b {
+    display: inline-block;
+    height: 1.5em;
+    vertical-align: middle;
+  }
+  b {
+    padding-left: 0.5em;
+  }
+  form {
+    position: fixed;
+  }
+  #palettes, fieldset, #legend {
+    padding: 1em;
+    margin: 1em;
+    border: 1px solid #666;
+    background: #FFF;
+  }
+  #palettes {
+   margin-top: 10em;
+  }
+  table, tbody, tr, td, th {
+    border: 0 none #FFF;
+  }
+  fieldset th {
+    text-align: right;
+    vertical-align: top;
+    padding-right: 0.5em;
+  }
+  #tooltip {
+    position: fixed;
+    bottom: 1em;
+    left: 1em;
+    padding: 1em;
+    border: 1px solid #666;
+    height: 1em;
+    width: 10em;
+    text-align: center;
+    background: #FFF;
+  }
+</style>
+<body>
+  <form>
+    <fieldset>
+      <legend>Settings</legend>
+      <table>
+        <tr>
+          <th><label for=blindness>Colour blindness simulation</label>
+          <td><select id=blindness><option value="">None</select>
+        <tr>
+          <th><label for=number>Number of colours</label><br>
+          <td><input type=number min=1 max=100 value=8 id=number><br>
+      </table>
+
+    </fieldset>
+  </form>
+  <div id=palettes title="Hover color to see it's value, click to keep selection."></div>
+  <div id=tooltip></div>
+  <div id=legend>
+    <p>“cbf” after the palette's name means given palette is
+      “colourblind friendly”.  All single hue palettes are colourblind
+      friendly.
+    <p>In RGB gradients the ones denoted “linear” calculate value for
+      the gradient prior to applying gamma function.  In theory, that
+      means the gradient should represent perceived increase in
+      luminosity better.
+    <p>Paul Tol's palettes have been designed to be colourblind
+      friendly as well as printer friendly.  More information about
+      them can be found at
+      <a href=http://www.sron.nl/~pault>www.sron.nl/~pault</a>.
+    <p>ColorBrewer palettes have been designed by Cynthia Brewer for
+      use in maps.  More information about them, including interactive
+      demo, can be found at
+      <a href=http://colorbrewer2.org>colorbrewer2.org</a>.
+    <p>Soralized palette have been designed by Ethan Schoonover for
+      use with tirminal and GUI applications.  As such, it has not
+      been optimised for use in graphs or maps, but the library
+      includes them nonetheless.  More information about Solarized can
+      be found at
+      <a href=http://ethanschoonover.com/solarized>ethanschoonover.com/solarized</a>.
+  </div>
+  <script src=palette.js></script>
+  <script src=demo.js></script>
