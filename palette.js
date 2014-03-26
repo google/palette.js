@@ -242,7 +242,7 @@ var palette = (function() {
 
       } else if (self.color_func) {
         return palette.generate(makeGenerator.apply(self, arguments),
-                                _number, 0, 1, self.color_func_cyclick);
+                                _number, 0, 1, self.color_func_cyclic);
 
       } else {
         return null;
@@ -333,17 +333,17 @@ var palette = (function() {
      * a palette.  This happens for hue-rainbows where the 0–1 range corresponds
      * to a 0°–360° range in hues, and since hue at 0° is the same as at 360°,
      * it's desired to stop short the end of the range when generating
-     * a palette.  To accomplish this, opt_cyclick should be set to true.
+     * a palette.  To accomplish this, opt_cyclic should be set to true.
      *
      * @param {!function(number): string} func A colour generator function.
      * @param {boolean=} opt_is_cbf Whether palette generate with the function
      *     is colour-blind friendly.
-     * @param {boolean=} opt_cyclick Whether colour at 0.0 is the same as the
+     * @param {boolean=} opt_cyclic Whether colour at 0.0 is the same as the
      *     one at 1.0.
      */
-    self.setColorFunction = function(func, opt_is_cbf, opt_cyclick) {
+    self.setColorFunction = function(func, opt_is_cbf, opt_cyclic) {
       self.color_func = func;
-      self.color_func_cyclick = !!opt_cyclick;
+      self.color_func_cyclic = !!opt_cyclic;
       self.max = INF;
       if (!opt_is_cbf && self.cbf_max_ === INF) {
         self.cbf_max_ = 1;
@@ -396,14 +396,14 @@ var palette = (function() {
    * @param {!function(number): string} func A colour generator function.
    * @param {boolean=} opt_is_cbf Whether palette generate with the function
    *     is colour-blind friendly.
-   * @param {boolean=} opt_cyclick Whether colour at 0.0 is the same as the
+   * @param {boolean=} opt_cyclic Whether colour at 0.0 is the same as the
    *     one at 1.0.
    * @return {function(number, ...*): Array.<string>} A colour palette
    *     generator function, which in addition has methods and properties like
    *     a regular object.  Think of it as a callable object.
    */
   palette.Scheme.withColorFunction = function(name, groups,
-                                              func, opt_is_cbf, opt_cyclick) {
+                                              func, opt_is_cbf, opt_cyclic) {
     var scheme = palette.Scheme(name, groups);
     scheme.setColorFunction.apply(scheme, slice(arguments, 2));
     return scheme;
@@ -585,13 +585,13 @@ var palette = (function() {
    * a palette.  This happens for hue-rainbows where the 0–1 range corresponds
    * to a 0°–360° range in hues, and since hue at 0° is the same as at 360°,
    * it's desired to stop short the end of the range when generating
-   * a palette.  To accomplish this, opt_cyclick should be set to true.
+   * a palette.  To accomplish this, opt_cyclic should be set to true.
    *
    * opt_start and opt_end may be used to change the range the colour
    * generation function is called with.  opt_end may be less than opt_start
    * which will case to traverse the range in reverse.  Another way to reverse
    * the palette is requesting negative number of colours.  The two methods do
-   * not always lead to the same results (especially if opt_cyclick is set).
+   * not always lead to the same results (especially if opt_cyclic is set).
    *
    * @param {function(number): string} color_func A colours generating
    *     callback function.
@@ -602,12 +602,12 @@ var palette = (function() {
    *     generation function.  Zero by default.
    * @param {number=} opt_end Optional ending point for the palette generation
    *     function.  One by default.
-   * @param {boolean=} opt_cyclick If true, function will assume colour at
+   * @param {boolean=} opt_cyclic If true, function will assume colour at
    *     point opt_start is the same as one at opt_end.
    * @return {!Array.<string>} An array of 'RRGGBB' colours.
    */
   palette.generate = function(color_func, number, opt_start, opt_end,
-                              opt_cyclick) {
+                              opt_cyclic) {
     if (Math.abs(number) < 1) {
       return [];
     }
@@ -622,7 +622,7 @@ var palette = (function() {
     var i = Math.abs(number);
     var x = opt_start;
     var ret = [];
-    var step = (opt_end - opt_start) / (opt_cyclick ? i : (i - 1));
+    var step = (opt_end - opt_start) / (opt_cyclic ? i : (i - 1));
 
     for (; --i >= 0; x += step) {
       ret.push(color_func(x));
