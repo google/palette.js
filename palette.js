@@ -82,18 +82,16 @@
 'use strict';
 
 var palette = (function() {
-  var ret = (function(proto) {
-    return {
-      slice: function(arr, opt_begin, opt_end) {
-        return proto.slice.apply(arr, proto.slice.call(arguments, 1));
-      },
-      extend: function(arr, arr2) {
-        proto.push.apply(arr, arr2);
-      }
-    };
-  })(Array.prototype);
-  var slice = ret.slice;
-  var extend = ret.extend;
+  
+  var proto = Array.prototype;
+  var slice = function(arr, opt_begin, opt_end) {
+    return proto.slice.apply(arr, proto.slice.call(arguments, 1));
+  }
+  
+  var extend = function(arr, arr2) {
+    return proto.push.apply(arr, arr2);
+  }
+  
   var function_type = typeof function(){};
 
   var INF = 1000000000;  // As far as we're concerned, that's infinity. ;)
