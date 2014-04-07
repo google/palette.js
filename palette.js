@@ -289,7 +289,7 @@ var palette = (function() {
         palettes_max = Math.max(palettes_max, len);
         self.max = Math.max(self.max, len);
         if (!opt_is_cbf && len != 1) {
-          self.cbf_max_ = Math.min(self.cbf_max_, len - 1);
+          self.cbf_max = Math.min(self.cbf_max, len - 1);
         }
       }
     };
@@ -306,13 +306,13 @@ var palette = (function() {
      *     colourblind friendly.  1 by default.
      */
     self.addPalettes = function(palettes, opt_max, opt_cbf_max) {
-      opt_cbf_max = opt_cbf_max || 1;
       opt_max = opt_max || palettes.length;
       for (var i = 0; i < opt_max; ++i) {
         if (i in palettes) {
-          self.addPalette(palettes[i], i <= opt_cbf_max);
+          self.addPalette(palettes[i], true);
         }
       }
+      self.cbf_max = Math.min(self.cbf_max, opt_cbf_max || 1);
     };
 
     /**
@@ -343,8 +343,8 @@ var palette = (function() {
       self.color_func = func;
       self.color_func_cyclic = !!opt_cyclic;
       self.max = INF;
-      if (!opt_is_cbf && self.cbf_max_ === INF) {
-        self.cbf_max_ = 1;
+      if (!opt_is_cbf && self.cbf_max === INF) {
+        self.cbf_max = 1;
       }
     };
 

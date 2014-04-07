@@ -181,7 +181,7 @@
         var title = scheme.scheme_name;
         if (scheme.cbf_max >= scheme.max) {
           title += ' (cbf)';
-        } else if (scheme.cbf_max) {
+        } else if (scheme.cbf_max > 1) {
           title += ' (cbf if no more than ' + scheme.cbf_max + ' colours)';
         }
         add(title, scheme);
