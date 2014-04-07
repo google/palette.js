@@ -82,16 +82,16 @@
 'use strict';
 
 var palette = (function() {
-  
+
   var proto = Array.prototype;
   var slice = function(arr, opt_begin, opt_end) {
     return proto.slice.apply(arr, proto.slice.call(arguments, 1));
   }
-  
+
   var extend = function(arr, arr2) {
     return proto.push.apply(arr, arr2);
   }
-  
+
   var function_type = typeof function(){};
 
   var INF = 1000000000;  // As far as we're concerned, that's infinity. ;)
@@ -225,9 +225,9 @@ var palette = (function() {
       number = Math.abs(number);
 
       if (number <= palettes_max) {
-        for (var i = Math.max(number, palettes_min);
-             !(i in palettes);
-             ++i) { /* nop */ }
+        for (var i = Math.max(number, palettes_min); !(i in palettes); ++i) {
+          /* nop */
+        }
         var colors = palettes[i];
         if (i > number) {
           return palette.generate(function(x) { return colors[Math.round(x)]; },
