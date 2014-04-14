@@ -230,8 +230,17 @@ var palette = (function() {
         }
         var colors = palettes[i];
         if (i > number) {
-          return palette.generate(function(x) { return colors[Math.round(x)]; },
-                                  _number, 0, colors.length - 1);
+          var take_head =
+              'shrinking_takes_head' in colors ?
+              colors.shrinking_takes_head : self.shrinking_takes_head;
+          if (take_head) {
+            colors = colors.slice(0, number);
+            i = number;
+          } else {
+            return palette.generate(
+                function(x) { return colors[Math.round(x)]; },
+                _number, 0, colors.length - 1);
+          }
         }
         if (_number < 0) {
           colors.reverse();
@@ -313,6 +322,63 @@ var palette = (function() {
         }
       }
       self.cbf_max = Math.min(self.cbf_max, opt_cbf_max || 1);
+    };
+
+    /**
+     * Enable shrinking palettes taking head of the list of colours.
+     *
+     * When user requests n-colour palette but the smallest palette added with
+     * addPalette (or addPalettes) is m-colour one (where n < m), n colours
+     * across the palette will be returned.  For example:
+     *     var ex = palette.Scheme('ex');
+     *     ex.addPalette(['000000', 'bcbcbc', 'ffffff']);
+     *     var pal = ex(2);
+     *     // pal == ['000000', 'ffffff']
+     *
+     * This works for palettes where the distance between colours is
+     * correlated to distance in the palette array, which is true in gradients
+     * such as the one above.
+     *
+     * To turn this feature off shrinkByTakingHead can be set to true either
+     * for all palettes in the scheme (if opt_idx is not given) or for palette
+     * with given number of colours only.  In general, setting the option for
+     * given palette overwrites whatever has been set for the scheme.  The
+     * default, as described above, is false.
+     *
+     * Alternatively, the feature can be enabled by setting
+     * shrinking_takes_head property for the palette Array or the scheme
+     * object.
+     *
+     * For example, all of the below give equivalent results:
+     *     var pal = ['ff0000', '00ff00', '0000ff'];
+     *
+     *     var ex = palette.Scheme('ex');
+     *     ex.addPalette(pal);               // ex(2) == ['ff0000', '0000ff']
+     *     ex.shrinkByTakingHead(true);      // ex(2) == ['ff0000', '00ff00']
+     *
+     *     ex = palette.Scheme('ex');
+     *     ex.addPalette(pal);               // ex(2) == ['ff0000', '0000ff']
+     *     ex.shrinkByTakingHead(true, 3);   // ex(2) == ['ff0000', '00ff00']
+     *
+     *     ex = palette.Scheme('ex');
+     *     ex.addPalette(pal);
+     *     ex.addPalette(pal);               // ex(2) == ['ff0000', '0000ff']
+     *     pal.shrinking_takes_head = true;  // ex(2) == ['ff0000', '00ff00']
+     *
+     * @param {boolean} enabled Whether to enable or disable the “shrinking
+     *     takes head” feature.  It is disabled by default.
+     * @param {number=} opt_idx If given, the “shrinking takes head” option
+     *     for palette with given number of colours is set.  If such palette
+     *     does not exist, nothing happens.
+     */
+    self.shrinkByTakingHead = function(enabled, opt_idx) {
+      if (opt_idx !== void(0)) {
+        if (opt_idx in palettes) {
+          palettes[opt_idx].shrinking_takes_head = !!enabled;
+        }
+      } else {
+        self.shrinking_takes_head = !!enabled;
+      }
     };
 
     /**
