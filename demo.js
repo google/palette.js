@@ -84,7 +84,7 @@
   var createColorRow = function(colors, title) {
     var row = createDom('tr', null,
                         createDom('td'),
-                        createDom('td', null, title))
+                        createDom('td', null, title));
 
     if (colors) {
       var width = Math.max(Math.round(500 / colors.length), 5);
@@ -166,7 +166,7 @@
       if (colors) {
         colors = transformColors(colors, transform);
       }
-      tbody.appendChild(createColorRow(colors, title || name))
+      tbody.appendChild(createColorRow(colors, title || name));
     };
 
     addHeading("Paul Tol's palettes");
@@ -188,13 +188,13 @@
       });
     });
 
-    addHeading("HSV rainbows");
+    addHeading('HSV rainbows');
     add('HSV Rainbow (s=1, v=1)', 'rainbow');
     add('HSV Rainbow (s=.5, v=1)', 'rainbow', 0.5);
     add('HSV Rainbow (s=1, v=.5)', 'rainbow', 1, 0.5);
     add('HSV Rainbow (s=.5, v=.5)', 'rainbow', 0.5, 0.5);
 
-    addHeading("RGB gradients");
+    addHeading('RGB gradients');
     add('Red',
         function(x) { return palette.rgbColor(x, 0, 0); });
     add('Red (linear)',
