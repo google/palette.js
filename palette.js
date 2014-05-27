@@ -112,8 +112,8 @@ var palette = (function() {
    *     palette_for_bar = palette('sequential', 10, 1);
    *     palette_for_baz = palette('sequential', 10, 2);
    *
-   * @param {!function(number, ...[*])|string|!Array.<string>} scheme
-   *     Scheme to generate palette for.  Either a function constructed with
+   * @param {!palette.SchemeType|string|palette.Palette} scheme Scheme to
+   *     generate palette for.  Either a function constructed with
    *     palette.Scheme object, or anything that palette.listSchemes accepts
    *     as name argument.
    * @param {number} number Number of colours to return.  If negative,
@@ -134,11 +134,12 @@ var palette = (function() {
     }
 
     if (typeof scheme !== function_type) {
-      scheme = palette.listSchemes(scheme, number);
-      if (!scheme.length) {
+      var arr = palette.listSchemes(
+          /** @type {string|palette.Palette} */ (scheme), number);
+      if (!arr.length) {
         return null;
       }
-      scheme = scheme[(opt_index || 0) % scheme.length];
+      scheme = arr[(opt_index || 0) % arr.length];
     }
 
     var args = slice(arguments, 2);
@@ -166,14 +167,14 @@ var palette = (function() {
    *     groups the scheme should be categorised under.  Three typical groups
    *     to use are 'qualitative', 'sequential' and 'diverging', but any
    *     groups may be created.
-   * @return {function(number, ...[*]): Array.<string>} A colour palette
-   *     generator function, which in addition has methods and properties like
-   *     a regular object.  Think of it as a callable object.
+   * @return {!palette.SchemeType} A colour palette generator function, which
+   *     in addition has methods and properties like a regular object.  Think
+   *     of it as a callable object.
    */
   palette.Scheme = function(name, opt_groups) {
     /**
      * A map from a number to a colour palettes with given number of colours.
-     * @type {!Object.<number, !Array.<string>>}
+     * @type {!Object.<number, palette.Palette>}
      */
     var palettes = {};
 
@@ -286,8 +287,8 @@ var palette = (function() {
     /**
      * Adds a colour palette to the colour scheme.
      *
-     * @param {!Array.<string>} An array of 'RRGGBB' strings representing the
-     *     palette to add.
+     * @param {palette.Palette} palette An array of 'RRGGBB' strings
+     *     representing the palette to add.
      * @param {boolean=} opt_is_cbf Whether the palette is colourblind friendly.
      */
     self.addPalette = function(palette, opt_is_cbf) {
@@ -306,9 +307,9 @@ var palette = (function() {
     /**
      * Adds number of colour palettes to the colour scheme.
      *
-     * @param {!Object.<number, !Array.<string>>|!Array.<!Array.<string>>}
-     *     palettes A map or an array of colour palettes to add.  If map, i.e.
-     *     object, is used, properties should use integer property names.
+     * @param {palette.PalettesList} palettes A map or an array of colour
+     *     palettes to add.  If map, i.e.  object, is used, properties should
+     *     use integer property names.
      * @param {number=} opt_max Size of the biggest palette in palettes set.
      *     If not set, palettes must have a length property which will be used.
      * @param {number=} opt_cbf_max Size of the biggest palette which is still
@@ -399,7 +400,7 @@ var palette = (function() {
      * it's desired to stop short the end of the range when generating
      * a palette.  To accomplish this, opt_cyclic should be set to true.
      *
-     * @param {!function(number): string} func A colour generator function.
+     * @param {palette.ColorFunction} func A colour generator function.
      * @param {boolean=} opt_is_cbf Whether palette generate with the function
      *     is colour-blind friendly.
      * @param {boolean=} opt_cyclic Whether colour at 0.0 is the same as the
@@ -431,17 +432,18 @@ var palette = (function() {
    * method with the rest of the arguments.
    *
    * @param {string} name Name of the scheme.
-   * @param {string|!Array.<string>=} opt_groups A group name or list of
-   * @param {!Object.<number, !Array.<string>>|!Array.<!Array.<string>>}
+   * @param {string|!Array.<string>} groups A group name or list of group
+   *     names the scheme belongs to.
+   * @param {!Object.<number, palette.Palette>|!Array.<palette.Palette>}
    *     palettes A map or an array of colour palettes to add.  If map, i.e.
    *     object, is used, properties should use integer property names.
    * @param {number=} opt_max Size of the biggest palette in palettes set.
    *     If not set, palettes must have a length property which will be used.
    * @param {number=} opt_cbf_max Size of the biggest palette which is still
    *     colourblind friendly.  1 by default.
-   * @return {function(number, ...[*]): Array.<string>} A colour palette
-   *     generator function, which in addition has methods and properties like
-   *     a regular object.  Think of it as a callable object.
+   * @return {!palette.SchemeType} A colour palette generator function, which
+   *     in addition has methods and properties like a regular object.  Think
+   *     of it as a callable object.
    */
   palette.Scheme.fromPalettes = function(name, groups,
                                          palettes, opt_max, opt_cbf_max) {
@@ -456,15 +458,16 @@ var palette = (function() {
    * setColorFunction method with the rest of the arguments.
    *
    * @param {string} name Name of the scheme.
-   * @param {string|!Array.<string>=} opt_groups A group name or list of
-   * @param {!function(number): string} func A colour generator function.
+   * @param {string|!Array.<string>} groups A group name or list of group
+   *     names the scheme belongs to.
+   * @param {palette.ColorFunction} func A colour generator function.
    * @param {boolean=} opt_is_cbf Whether palette generate with the function
    *     is colour-blind friendly.
    * @param {boolean=} opt_cyclic Whether colour at 0.0 is the same as the
    *     one at 1.0.
-   * @return {function(number, ...[*]): Array.<string>} A colour palette
-   *     generator function, which in addition has methods and properties like
-   *     a regular object.  Think of it as a callable object.
+   * @return {!palette.SchemeType} A colour palette generator function, which
+   *     in addition has methods and properties like a regular object.  Think
+   *     of it as a callable object.
    */
   palette.Scheme.withColorFunction = function(name, groups,
                                               func, opt_is_cbf, opt_cyclic) {
@@ -487,7 +490,7 @@ var palette = (function() {
   /**
    * Registers a new colour scheme.
    *
-   * @param {!palette.Scheme} scheme The scheme to add.
+   * @param {!palette.SchemeType} scheme The scheme to add.
    */
   palette.register = function(scheme) {
     registered_schemes['n-' + scheme.scheme_name] = [scheme];
@@ -601,8 +604,8 @@ var palette = (function() {
    * @param {number=} opt_number When requesting only colourblind friendly
    *     schemes, number of colours the scheme must provide generating such
    *     that the palette is still colourblind friendly.  2 by default.
-   * @return {!Array.<!Object>} An array of colour scheme objects matching the
-   *     criteria.  Sorted by scheme name.
+   * @return {!Array.<!palette.SchemeType>} An array of colour scheme objects
+   *     matching the criteria.  Sorted by scheme name.
    */
   palette.listSchemes = function(name, opt_number) {
     if (!opt_number) {
@@ -657,8 +660,8 @@ var palette = (function() {
    * the palette is requesting negative number of colours.  The two methods do
    * not always lead to the same results (especially if opt_cyclic is set).
    *
-   * @param {function(number): string} color_func A colours generating
-   *     callback function.
+   * @param {palette.ColorFunction} color_func A colours generating callback
+   *     function.
    * @param {number} number Number of colours to generate in the palette.  If
    *     number is negative, colours in the palette will be reversed.  If only
    *     one colour is requested, colour at opt_start will be returned.
@@ -668,7 +671,7 @@ var palette = (function() {
    *     function.  One by default.
    * @param {boolean=} opt_cyclic If true, function will assume colour at
    *     point opt_start is the same as one at opt_end.
-   * @return {!Array.<string>} An array of 'RRGGBB' colours.
+   * @return {palette.Palette} An array of 'RRGGBB' colours.
    */
   palette.generate = function(color_func, number, opt_start, opt_end,
                               opt_cyclic) {
@@ -762,15 +765,41 @@ var palette = (function() {
     case 2: return palette.rgbColor(m, v, x);
     case 3: return palette.rgbColor(m, x, v);
     case 4: return palette.rgbColor(x, m, v);
-    case 5: return palette.rgbColor(v, m, x);
+    default: return palette.rgbColor(v, m, x);
     }
   };
 
   palette.register(palette.Scheme.withColorFunction(
-    'rainbow', 'qualitative', palette.hsvColor, 0, true));
+    'rainbow', 'qualitative', palette.hsvColor, false, true));
 
   return palette;
 })();
+
+
+/** @typedef {function(number): string} */
+palette.ColorFunction;
+
+/** @typedef {!Array.<string>} */
+palette.Palette;
+
+/** @typedef {!Object.<number, palette.Palette>|!Array.<palette.Palette>} */
+palette.PalettesList;
+
+/**
+ * @typedef {
+ *   function(number, ...[?]): Array.<string>|
+ *   {
+ *     scheme_name: string,
+ *     groups: !Array.<string>,
+ *     max: number,
+ *     cbf_max: number,
+ *     addPalette: function(!Array.<string>, boolean=),
+ *     addPalettes: function(palette.PalettesList, number=, number=),
+ *     shrinkByTakingHead: function(boolean, number=),
+ *     setColorFunction: function(palette.ColorFunction, boolean=, boolean=),
+ *     color: function(number, ...[?]): ?string}}
+ */
+palette.SchemeType;
 
 
 /* Paul Tol's schemes start here. *******************************************/
