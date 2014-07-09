@@ -243,6 +243,7 @@ var palette = (function() {
                 _number, 0, colors.length - 1);
           }
         }
+        colors = colors.slice();
         if (_number < 0) {
           colors.reverse();
         }
