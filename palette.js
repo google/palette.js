@@ -535,7 +535,7 @@ var palette = (function() {
    *     --------------  -----------------------------------------------------
    *     tol             Paul Tol's qualitative scheme, cbf, max 12 colours.
    *     tol-dv          Paul Tol's diverging scheme, cbf.
-   *     tol-seq         Paul Tol's sequential scheme, cbf.
+   *     tol-sq          Paul Tol's sequential scheme, cbf.
    *     tol-rainbow     Paul Tol's qualitative scheme, cbf.
    *
    *     rainbow         A rainbow palette.

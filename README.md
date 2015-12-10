@@ -49,9 +49,9 @@ function.  It takes two required arguments: A name of a colour scheme
 and size of the palette.  For example to generate a 10-colour palette
 one would invoke:
 
-    var seq = palette('tol-seq', 10);
+    var seq = palette('tol-sq', 10);
 
-`tol-seq` is a name for Pal Tol's sequential scheme.  In addition to
+`tol-sq` is a name for Pal Tol's sequential scheme.  In addition to
 names of schemes the function can also take group names or a list of
 palette names.  For example:
 
