@@ -120,6 +120,7 @@
 
 
   var palettes = byId('palettes');
+  var outputdisplay = byId('outputdisplay')
   var defaultBackground = palettes.style.backgroundColor;
   var tooltip = byId('tooltip');
 
@@ -134,7 +135,7 @@
     bg = bg || defaultBackground;
     tooltip.appendChild(document.createTextNode(bg));
     tooltip.style.display = bg ? '' : 'none';
-    palettes.style.backgroundColor = bg;
+    outputdisplay.style.backgroundColor = bg;
   };
   palettes.addEventListener('mousemove', mouseMoveHandler, false);
   palettes.addEventListener('mouseover', mouseMoveHandler, false);

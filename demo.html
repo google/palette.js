@@ -11,8 +11,13 @@
   }
   form {
     position: fixed;
-    top: 0;
+    top: 7em;
     left: 0;
+  }
+  h1 {
+    text-align: center;
+    padding: 0;
+    font-size: 3em;
   }
   #palettes, fieldset, #legend {
     padding: 1em;
@@ -21,7 +26,7 @@
     background: #FFF;
   }
   #palettes {
-   margin-top: 10em;
+   margin-top: 11em;
   }
   table, tbody, tr, td, th {
     border: 0 none #FFF;
@@ -38,12 +43,25 @@
     padding: 1em;
     border: 1px solid #666;
     height: 1em;
-    width: 10em;
+    width: 11em;
     text-align: center;
     background: #FFF;
+    position: fixed;
+    left: 69%;
+    top: 65%;
+    z-index: 0;
+  }
+  #outputdisplay {
+     height: 11em; 
+     width: 11em;
+     border: 2px solid black;
+     position: fixed; 
+     left: 70%;
+     top: 45%;
   }
 </style>
 <body>
+  <h1>Palette.js</h1>
   <form>
     <fieldset>
       <legend>Settings</legend>
@@ -58,6 +76,7 @@
 
     </fieldset>
   </form>
+  <div id="outputdisplay"></div>
   <div id=palettes title="Hover color to see it's value, click to keep selection."></div>
   <div id=tooltip></div>
   <div id=legend>
