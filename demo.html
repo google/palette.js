@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<head>
 <title>Palette generator demo</title>
 <style>
   span, b {
@@ -43,45 +44,49 @@
     background: #FFF;
   }
 </style>
+</head>
 <body>
   <form>
     <fieldset>
       <legend>Settings</legend>
       <table>
         <tr>
-          <th><label for=blindness>Colour blindness simulation</label>
-          <td><select id=blindness><option value="">None</select>
+          <th><label for=blindness>Colour blindness simulation</label></th>
+          <td><select id=blindness><option value="">None</select></td>
+        </tr>
         <tr>
-          <th><label for=number>Number of colours</label><br>
-          <td><input type=number min=1 max=100 value=8 id=number><br>
+          <th><label for=number>Number of colours</label></th><br>
+          <td><input type=number min=1 max=100 value=8 id="number"><br></td>
+        </tr>
       </table>
-
     </fieldset>
   </form>
-  <div id=palettes title="Hover color to see it's value, click to keep selection."></div>
-  <div id=tooltip></div>
-  <div id=legend>
-    <p>“cbf” after the palette's name means given palette is
+  <div id="palettes" title="Hover color to see it's value, click to keep selection."></div>
+  <div id="tooltip"></div>
+  <div id="legend">
+    <p>“cbf” after the palette&#39;s name means given palette is
       “colourblind friendly”.  All single hue palettes are colourblind
-      friendly.
+      friendly.</p>
     <p>In RGB gradients the ones denoted “linear” calculate value for
       the gradient prior to applying gamma function.  In theory, that
       means the gradient should represent perceived increase in
-      luminosity better.
-    <p>Paul Tol's palettes have been designed to be colourblind
+      luminosity better.</p>
+    <p>Paul Tol&#39;s palettes have been designed to be colourblind
       friendly as well as printer friendly.  More information about
-      them can be found at
-      <a href=http://www.sron.nl/~pault>www.sron.nl/~pault</a>.
+      them can be found at</p>
+      <a href="http://www.sron.nl/~pault">www.sron.nl/~pault</a>.
     <p>ColorBrewer palettes have been designed by Cynthia Brewer for
       use in maps.  More information about them, including interactive
-      demo, can be found at
-      <a href=http://colorbrewer2.org>colorbrewer2.org</a>.
+      demo, can be found at</p>
+      <a href="http://colorbrewer2.org">colorbrewer2.org</a>.
     <p>Soralized palette have been designed by Ethan Schoonover for
       use with terminal and GUI applications.  As such, it has not
       been optimised for use in graphs or maps, but the library
       includes them nonetheless.  More information about Solarized can
-      be found at
-      <a href=http://ethanschoonover.com/solarized>ethanschoonover.com/solarized</a>.
+      be found at</p>
+      <a href="http://ethanschoonover.com/solarized>ethanschoonover.com/solarized"></a>.
   </div>
   <script src=palette.js></script>
   <script src=demo.js></script>
+</body>
+</html>
