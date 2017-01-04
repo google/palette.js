@@ -51,7 +51,7 @@ one would invoke:
 
     var seq = palette('tol-sq', 10);
 
-`tol-sq` is a name for Pal Tol's sequential scheme.  In addition to
+`tol-sq` is a name for Paul Tol's sequential scheme.  In addition to
 names of schemes the function can also take group names or a list of
 palette names.  For example:
 
