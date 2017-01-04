@@ -1,0 +1,11 @@
+.DS_STORE
+*.log
+.idea
+node_modules
+lib
+dist
+coverage
+npm-debug.log
+*.iml
+*.tgz
+yarn.lock
