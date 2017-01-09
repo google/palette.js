@@ -1473,4 +1473,4 @@ palette.SchemeType;
   }
 })();
 
-export default palette;
+module.exports = palette;

@@ -9,3 +9,4 @@ npm-debug.log
 *.iml
 *.tgz
 yarn.lock
+build

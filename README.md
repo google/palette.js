@@ -101,3 +101,10 @@ bigger palettes aren't).
 
 [The demo page](http://google.github.io/palette.js/) contains code for
 colour blindness simulation mode.
+
+How to run the demo:
+
+npm install
+npm run demo
+
+surf to localhost:3000
