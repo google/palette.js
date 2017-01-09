@@ -1472,3 +1472,5 @@ palette.SchemeType;
     palette.register(scheme);
   }
 })();
+
+module.exports = palette;

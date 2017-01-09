@@ -18,9 +18,10 @@
 
 'use strict';
 
+var palette = require("google-color-palette");
+
 (function() {
   var byId = document.getElementById.bind(document);
-
 
   var transformColors = function(colors, callback) {
     if (!callback) {
