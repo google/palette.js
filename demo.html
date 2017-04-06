@@ -1,49 +1,52 @@
 <!DOCTYPE html>
-<meta charset=utf-8>
-<title>Palette generator demo</title>
-<style>
-  span, b {
-    display: inline-block;
-    height: 1.5em;
-    vertical-align: middle;
-  }
-  b {
-    padding-left: 0.5em;
-  }
-  form {
-    position: fixed;
-    top: 0;
-    left: 0;
-  }
-  #palettes, fieldset, #legend {
-    padding: 1em;
-    margin: 1em;
-    border: 1px solid #666;
-    background: #FFF;
-  }
-  #palettes {
-   margin-top: 10em;
-  }
-  table, tbody, tr, td, th {
-    border: 0 none #FFF;
-  }
-  fieldset th {
-    text-align: right;
-    vertical-align: top;
-    padding-right: 0.5em;
-  }
-  #tooltip {
-    position: fixed;
-    bottom: 1em;
-    left: 1em;
-    padding: 1em;
-    border: 1px solid #666;
-    height: 1em;
-    width: 10em;
-    text-align: center;
-    background: #FFF;
-  }
-</style>
+<head>
+    <meta charset=utf-8>
+    <title>Palette generator demo</title>
+    <link rel="stylesheet" href="./main.css">
+    <style>
+      span, b {
+        display: inline-block;
+        height: 1.5em;
+        vertical-align: middle;
+      }
+      b {
+        padding-left: 0.5em;
+      }
+      form {
+        position: fixed;
+        top: 0;
+        left: 0;
+      }
+      #palettes, fieldset, #legend {
+        padding: 1em;
+        margin: 1em;
+        border: 1px solid #666;
+        background: #FFF;
+      }
+      #palettes {
+       margin-top: 10em;
+      }
+      table, tbody, tr, td, th {
+        border: 0 none #FFF;
+      }
+      fieldset th {
+        text-align: right;
+        vertical-align: top;
+        padding-right: 0.5em;
+      }
+      #tooltip {
+        position: fixed;
+        bottom: 1em;
+        left: 1em;
+        padding: 1em;
+        border: 1px solid #666;
+        height: 1em;
+        width: 10em;
+        text-align: center;
+        background: #FFF;
+      }
+    </style>
+</head>
 <body>
   <form>
     <fieldset>
