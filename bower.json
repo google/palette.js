@@ -1,0 +1,22 @@
+{
+  "name": "palette.js",
+  "main": "palette.js",
+  "homepage": "https://github.com/google/palette.js",
+  "authors": [
+    "Google"
+  ],
+  "description": "Allows you to generate palette colours for use in graphs, charts and cartography.",
+  "keywords": [
+    "colour",
+    "palette",
+    "qualitative",
+    "sequential",
+    "diverging",
+    "scheme"
+  ],
+  "license": "Apache-2.0",
+  "ignore": [
+    "demo.html",
+    "demo.js"
+  ]
+}
