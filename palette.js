@@ -1472,3 +1472,7 @@ palette.SchemeType;
     palette.register(scheme);
   }
 })();
+
+if(typeof module === "object" && module.exports) {
+  module.exports = palette
+}

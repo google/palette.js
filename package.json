@@ -1,0 +1,23 @@
+{
+  "name": "google-palette",
+  "version": "1.0.0",
+  "description": "Script for generating colour palettes for use with graphs, charts and cartography.",
+  "main": "palette.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/google/palette.js.git"
+  },
+  "keywords": [
+    "palette",
+    "palette.js",
+    "palettejs",
+    "google",
+    "google-color-palette"
+  ],
+  "author": "Google Inc.",
+  "license": "Apache-2.0",
+  "homepage": "https://github.com/google/palette.js#readme"
+}
