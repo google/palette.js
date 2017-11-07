@@ -807,7 +807,7 @@ palette.SchemeType;
 
   /**
    * Calculates value of a polynomial at given point.
-   * For example, poly(x, 1, 2, 3) calculates value of “1 + 2*x + 2*X^2”.
+   * For example, poly(x, 1, 2, 3) calculates value of “1 + 2*x + 3*X²”.
    * @param {number} x Value to calculate polynomial for.
    * @param {...number} varargs Coefficients of the polynomial specified in
    *     the order of rising powers of x including constant as the first
