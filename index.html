@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<meta charset=utf-8>
 <title>Palette generator demo</title>
 <style>
   span, b {
@@ -58,17 +59,13 @@
 
     </fieldset>
   </form>
-  <div id=palettes title="Hover color to see it's value, click to keep selection."></div>
+  <div id=palettes title="Hover over colour to see its value, click to keep selection."></div>
   <div id=tooltip></div>
   <div id=legend>
-    <p>“cbf” after the palette's name means given palette is
-      “colourblind friendly”.  All single hue palettes are colourblind
-      friendly.
-    <p>In RGB gradients the ones denoted “linear” calculate value for
-      the gradient prior to applying gamma function.  In theory, that
-      means the gradient should represent perceived increase in
-      luminosity better.
-    <p>Paul Tol's palettes have been designed to be colourblind
+    <p>“cbf” after the palette’s name indicates given palette is “colourblind
+      friendly”, i.e. colours are distinguishable even by a colour-blind person.
+      All single hue palettes are colourblind friendly.
+    <p>Paul Tol’s palettes have been designed to be colourblind
       friendly as well as printer friendly.  More information about
       them can be found at
       <a href=http://www.sron.nl/~pault>www.sron.nl/~pault</a>.
@@ -76,11 +73,10 @@
       use in maps.  More information about them, including interactive
       demo, can be found at
       <a href=http://colorbrewer2.org>colorbrewer2.org</a>.
-    <p>Soralized palette have been designed by Ethan Schoonover for
-      use with terminal and GUI applications.  As such, it has not
-      been optimised for use in graphs or maps, but the library
-      includes them nonetheless.  More information about Solarized can
-      be found at
+    <p>Soralized palette have been designed by Ethan Schoonover for use with
+      terminal and GUI applications.  As such, it has not been optimised for use
+      in graphs or maps, but the library includes them nonetheless.  More
+      information about Solarized can be found at
       <a href=http://ethanschoonover.com/solarized>ethanschoonover.com/solarized</a>.
   </div>
   <script src=palette.js></script>
