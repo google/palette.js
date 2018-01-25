@@ -213,34 +213,13 @@
     add('HSV Rainbow (s=.5, v=.5)', 'rainbow', 0.5, 0.5);
 
     addHeading('RGB gradients');
-    add('Red',
-        function(x) { return palette.rgbColor(x, 0, 0); });
-    add('Red (linear)',
-        function(x) { return palette.linearRgbColor(x, 0, 0); });
-    add('Green',
-        function(x) { return palette.rgbColor(0, x, 0); });
-    add('Green (linear)',
-        function(x) { return palette.linearRgbColor(0, x, 0); });
-    add('Blue',
-        function(x) { return palette.rgbColor(0, 0, x); });
-    add('Blue (linear)',
-        function(x) { return palette.linearRgbColor(0, 0, x); });
-    add('Yellow',
-        function(x) { return palette.rgbColor(x, x, 0); });
-    add('Yellow (linear)',
-        function(x) { return palette.linearRgbColor(x, x, 0); });
-    add('Magenta',
-        function(x) { return palette.rgbColor(x, 0, x); });
-    add('Magenta (linear)',
-        function(x) { return palette.linearRgbColor(x, 0, x); });
-    add('Cyan',
-        function(x) { return palette.rgbColor(0, x, x); });
-    add('Cyan (linear)',
-        function(x) { return palette.linearRgbColor(0, x, x); });
-    add('Grayscale',
-        function(x) { return palette.rgbColor(x, x, x); });
-    add('Grayscale (linear)',
-        function(x) { return palette.linearRgbColor(x, x, x); });
+    add('Red', function(x) { return palette.rgbColor(x, 0, 0); });
+    add('Green', function(x) { return palette.rgbColor(0, x, 0); });
+    add('Blue', function(x) { return palette.rgbColor(0, 0, x); });
+    add('Yellow', function(x) { return palette.rgbColor(x, x, 0); });
+    add('Magenta', function(x) { return palette.rgbColor(x, 0, x); });
+    add('Cyan', function(x) { return palette.rgbColor(0, x, x); });
+    add('Grayscale', function(x) { return palette.rgbColor(x, x, x); });
 
     addHeading('Solarized palettes');
     add('Solarized base colours', 'sol-base');
