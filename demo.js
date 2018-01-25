@@ -187,6 +187,9 @@
       tbody.appendChild(createColorRow(colors, title || name));
     };
 
+    addHeading('Miscellaneous');
+    add('Big qualitative palette', 'mpn65');
+
     addHeading("Paul Tol's palettes");
     add("Tol's qualitative palette (cbf)", 'tol');
     add("Tol's Diverging palette (cbf)", 'tol-dv');
