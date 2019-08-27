@@ -123,6 +123,18 @@
   var defaultBackground = palettes.style.backgroundColor;
   var tooltip = byId('tooltip');
 
+  function hex(x) {
+    return ("0" + parseInt(x).toString(16)).slice(-2);
+  }
+
+  function rgbToHex(rgb) {
+    if (!rgb) {
+      return "";
+    }
+    rgb = rgb.match(/^rgba?\((\d+),\s*(\d+),\s*(\d+)(,\s*\d+\.*\d+)?\)$/);
+    return ("#" + hex(rgb[1]) + hex(rgb[2]) + hex(rgb[3])).toUpperCase();
+  }
+
   var mouseMoveHandler = function(e) {
     var target = e.target, bg;
     if (tooltip.firstChild) {
@@ -132,7 +144,8 @@
       bg = target.style.backgroundColor;
     }
     bg = bg || defaultBackground;
-    tooltip.appendChild(document.createTextNode(bg));
+    var colStr = bg + "\xa0\xa0\xa0\xa0" + rgbToHex(bg)
+    tooltip.appendChild(document.createTextNode(colStr));
     tooltip.style.display = bg ? '' : 'none';
     palettes.style.backgroundColor = bg;
   };
