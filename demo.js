@@ -124,15 +124,15 @@
   var tooltip = byId('tooltip');
 
   function hex(x) {
-    return ("0" + parseInt(x).toString(16)).slice(-2);
+    return ('0' + parseInt(x).toString(16)).slice(-2);
   }
 
   function rgbToHex(rgb) {
-    if (!rgb) {
-      return "";
-    }
-    rgb = rgb.match(/^rgba?\((\d+),\s*(\d+),\s*(\d+)(,\s*\d+\.*\d+)?\)$/);
-    return ("#" + hex(rgb[1]) + hex(rgb[2]) + hex(rgb[3])).toUpperCase();
+    var match =
+      rgb && rgb.match(/^rgba?\((\d+),\s*(\d+),\s*(\d+)(,\s*\d+\.*\d+)?\)$/);
+    return m
+      ? ("#" + hex(rgb[1]) + hex(rgb[2]) + hex(rgb[3])).toUpperCase()
+      : "";
   }
 
   var mouseMoveHandler = function(e) {
@@ -144,7 +144,7 @@
       bg = target.style.backgroundColor;
     }
     bg = bg || defaultBackground;
-    var colStr = bg + "\xa0\xa0\xa0\xa0" + rgbToHex(bg)
+    var colStr = bg + '\u2003' + rgbToHex(bg)
     tooltip.appendChild(document.createTextNode(colStr));
     tooltip.style.display = bg ? '' : 'none';
     palettes.style.backgroundColor = bg;
@@ -203,11 +203,11 @@
     addHeading('Miscellaneous');
     add('Big qualitative palette', 'mpn65');
 
-    addHeading("Paul Tol's palettes");
-    add("Tol's qualitative palette (cbf)", 'tol');
-    add("Tol's Diverging palette (cbf)", 'tol-dv');
-    add("Tol's Sequential palette (cbf)", 'tol-sq');
-    add("Tol's Rainbow palette (cbf)", 'tol-rainbow');
+    addHeading('Paul Tol\'s palettes');
+    add('Tol\'s qualitative palette (cbf)', 'tol');
+    add('Tol\'s Diverging palette (cbf)', 'tol-dv');
+    add('Tol\'s Sequential palette (cbf)', 'tol-sq');
+    add('Tol\'s Rainbow palette (cbf)', 'tol-rainbow');
 
     ['sequential', 'diverging', 'qualitative'].forEach(function(type) {
       addHeading('ColorBrewer ' + type + ' palettes');
