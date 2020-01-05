@@ -131,8 +131,8 @@
     var match =
       rgb && rgb.match(/^rgba?\((\d+),\s*(\d+),\s*(\d+)(,\s*\d+\.*\d+)?\)$/);
     return m
-      ? ("#" + hex(rgb[1]) + hex(rgb[2]) + hex(rgb[3])).toUpperCase()
-      : "";
+      ? ('#' + hex(rgb[1]) + hex(rgb[2]) + hex(rgb[3])).toUpperCase()
+      : '';
   }
 
   var mouseMoveHandler = function(e) {
